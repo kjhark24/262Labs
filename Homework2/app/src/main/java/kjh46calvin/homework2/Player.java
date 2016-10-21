@@ -1,9 +1,9 @@
 package kjh46calvin.homework2;
 
-        import java.text.SimpleDateFormat;
-        import java.util.Calendar;
-        import java.util.StringTokenizer;
-        import java.util.TimeZone;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.StringTokenizer;
+import java.util.TimeZone;
 
 /**
  * Weather forecast object (POJO), one per day, based on openweathermap's RESTful API.
