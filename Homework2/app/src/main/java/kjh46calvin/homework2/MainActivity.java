@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -21,8 +20,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,22 +32,19 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private EditText idText;
-    private Button fetchButton;
 
-    private List<Player> playerList = new ArrayList<>();
+    private final List<Player> playerList = new ArrayList<>();
     private ListView itemsListView;
 
-    /* This formater can be used as follows to format temperatures for display.
+    /* This formatter can be used as follows to format temperatures for display.
      *     numberFormat.format(SOME_DOUBLE_VALUE)
      */
-    private NumberFormat numberFormat = NumberFormat.getInstance();
-
-    private static String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button fetchButton;
 
         idText = (EditText) findViewById(R.id.idText);
         fetchButton = (Button) findViewById(R.id.fetchButton);
@@ -76,11 +70,11 @@ public class MainActivity extends AppCompatActivity {
      */
     private URL createURL(String id) {
         try {
-            String urlString = "http://cs262.cs.calvin.edu:8089/monopoly/players";
+            String urlString;
             if (id.isEmpty()) {
                 urlString = "http://cs262.cs.calvin.edu:8089/monopoly/players";
             } else {
-                urlString = "http://cs262.cs.calvin.edu:8089/monopoly/player/"+id;
+                urlString = "http://cs262.cs.calvin.edu:8089/monopoly/player/" + id;
             }
             return new URL(urlString);
         } catch (Exception e) {
@@ -121,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     try {
                         return new JSONArray(result.toString());
-                    } catch(JSONException e){
+                    } catch (JSONException e) {
                         JSONArray array = new JSONArray();
                         array.put(new JSONObject(result.toString()));
                         return array;
@@ -150,9 +144,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Converts the JSON weather forecast data to an arraylist suitable for a listview adapter
-     *
-     * @param players
+     * Converts the JSON weather forecast data to an array list suitable for a list view adapter
      */
     private void convertJSONtoArrayList(JSONArray players) {
         playerList.clear(); // clear old weather data
@@ -177,9 +169,9 @@ public class MainActivity extends AppCompatActivity {
         if (playerList == null) {
             Toast.makeText(MainActivity.this, getString(R.string.connection_error), Toast.LENGTH_SHORT).show();
         }
-        ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
+        ArrayList<HashMap<String, String>> data = new ArrayList<>();
         for (Player item : playerList) {
-            HashMap<String, String> map = new HashMap<String, String>();
+            HashMap<String, String> map = new HashMap<>();
             map.put("id", item.getId());
             map.put("name", item.getName());   //map the temperatures
             map.put("emailaddress", item.getEmail());

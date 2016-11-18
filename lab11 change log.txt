@@ -1,0 +1,22 @@
+Client Side
+
+fixed class structure - moved Button initialization to class where it is used
+made player list final to get rid of decleration redundancy
+Got rid of declaration redundancy for a few other calls
+Gor rid of unused imports
+for new hashmap calls got rid of content in <> as they are unneeded
+Fixed a few javadoc issues
+Certain probable bugs not fixed as I believe they are needed.
+Fixed spelling issues
+
+
+Server Side
+Not sure how to fix a compiler issue, unchecked warning.
+Also not sure if i should delete a caught exception that is immeadilty thrown so I kept it
+Got rid of unused imports
+made class Player package private
+Documentation says player constructor needed so did not delete
+many aspects of player class are never used but I'm keeping them if necessary in the future
+Replaced try with resources.
+Fixed javadoc problems.
+Fixed spelling issues
